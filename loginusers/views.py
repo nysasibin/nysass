@@ -1,21 +1,22 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.hashers import make_password
 from rest_framework import viewsets, status
 from rest_framework.decorators import action, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
+from .permissions import AllowOnlyOneIP
 
-from .models import User
+
+
 from .serializers import UserLoginSerializer
 
 
 class UserLoginViewSet(viewsets.GenericViewSet):
     serializer_class = UserLoginSerializer
+    permission_classes = [AllowOnlyOneIP]
 
     @action(detail=False, methods=['post'])
-    @permission_classes([AllowAny])
+    #@permission_classes([AllowAny])
     def login(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)

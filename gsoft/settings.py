@@ -167,6 +167,9 @@ AWS_ALLOWED_OBJECTS = [
 # Set up the storage backend
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+## to remove sgned URl  If we dont give below we will get only a signed url
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = 'public-read'
 
 
 ## command to install dotenv  $ pip install python-dotenv
@@ -185,3 +188,16 @@ CRON_CLASSES = [
     "blog.cron.UpdatePostStatusCronJob",
 
 ]
+
+
+
+#new Add
+
+#
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',  # For other viewsets, restrict access by default
+#     ]
+# }
+#
+#

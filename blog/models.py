@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=2000)
-    blogs = models.CharField(max_length=2000,unique=True)
+    slug = models.CharField(max_length=2000,unique=True)
     read_time = models.CharField(max_length=100)
     category = models.ForeignKey(Category, related_name='blog', on_delete=models.CASCADE)
     image1 = models.FileField(upload_to='images/', null=True, blank=True)
